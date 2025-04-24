@@ -10,6 +10,10 @@ public class Cuatro_Listas {
         listaProductos.add("Sillas");
         listaProductos.add("Lavarropas");
 
-        System.out.println(listaProductos);     // en la consola se muesstra como un array
+        System.out.println(listaProductos);     // muestra como un array
+
+        for(String producto : listaProductos){  // en forma de lista de items
+            System.out.println(producto);
+        }
     }
 }

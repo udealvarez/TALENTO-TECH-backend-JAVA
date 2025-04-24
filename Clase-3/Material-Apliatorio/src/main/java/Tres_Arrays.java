@@ -8,7 +8,7 @@ public class Tres_Arrays {
 
         // MUESTRO LOS PRODUCTOS DEL ARRAY
         for (int i = 0; i < productos.length ; i++) {
-            System.out.println(productos[i]);
+            System.out.println("Producto: " + productos[i]);
         }
     }
 }

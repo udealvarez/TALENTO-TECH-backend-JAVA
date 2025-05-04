@@ -1,3 +1,9 @@
+# Ignorar archivos de sistema macOS
+.DS_Store
+
+# Ignorar archivos de IDEs (en este caso IntelliJ IDEA)
+.idea/
+
 # Compiled class file
 *.class
 

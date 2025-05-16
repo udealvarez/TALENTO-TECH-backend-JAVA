@@ -1,22 +1,19 @@
 # Ignorar archivos de sistema macOS
 .DS_Store
 
-# Ignorar archivos de IDEs (en este caso IntelliJ IDEA)
+# Ignorar archivos de IDEs (IntelliJ IDEA)
 .idea/
 
-# Compiled class file
+# Ignorar carpetas y archivos generados por Maven
+target/
+
+# Ignorar archivos compilados Java
 *.class
 
-# Log file
+# Ignorar archivos de log
 *.log
 
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
+# Ignorar archivos empaquetados
 *.jar
 *.war
 *.nar
@@ -25,6 +22,9 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# Ignorar archivos temporales de Java ME
+.mtj.tmp/
+
+# Ignorar virtual machine crash logs
 hs_err_pid*
 replay_pid*

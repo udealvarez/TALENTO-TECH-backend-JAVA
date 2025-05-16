@@ -1,3 +1,5 @@
+package com.techlab.ui;
+
 import com.techlab.clientes.Cliente;
 import com.techlab.excepciones.ProductoNoEncontradoException;
 import com.techlab.pedidos.Pedido;
@@ -50,6 +52,5 @@ public class Main {
         } catch (ProductoNoEncontradoException e){
             System.out.println("ERROR " + e.getMessage());
         }
-
     }
 }

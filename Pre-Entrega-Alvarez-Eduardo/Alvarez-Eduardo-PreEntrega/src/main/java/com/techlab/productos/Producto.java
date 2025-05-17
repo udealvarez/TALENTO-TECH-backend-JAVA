@@ -31,7 +31,7 @@ public abstract class Producto {
         }
     }
 
-    private String formatearNombre(String nombreOriginal) {
+    protected String formatearNombre(String nombreOriginal) {
 
         String[] palabras = nombreOriginal.split(" ");
         StringBuilder resultado = new StringBuilder();

@@ -14,7 +14,6 @@ public class PedidoService {
         pedidos = new ArrayList<>();
     }
 
-    // Este méto do quedará listo para completar en el siguiente paso
     public void crearPedido(Scanner scanner, ProductoService productoService) {
         if (productoService.obtenerProductos().isEmpty()) {
             System.out.println("No hay productos disponibles para realizar un pedido.");

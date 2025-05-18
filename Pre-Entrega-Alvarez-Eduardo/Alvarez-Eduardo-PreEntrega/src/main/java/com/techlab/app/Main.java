@@ -8,6 +8,7 @@ import com.techlab.productos.Libro;
 import com.techlab.productos.Producto;
 import com.techlab.productos.Ropa;
 import com.techlab.productos.Tecnologia;
+import com.techlab.servicios.PedidoService;
 import com.techlab.servicios.ProductoService;
 
 import java.util.Scanner;
@@ -16,6 +17,7 @@ public class Main {
 
     private static ProductoService productoService = new ProductoService();
     private static Scanner scanner = new Scanner(System.in);
+    private static PedidoService pedidoService = new PedidoService();
 
     public static void main(String[] args) {
 
@@ -41,10 +43,10 @@ public class Main {
                     eliminarProducto();
                     break;
                 case "5":
-                    crearPedido(); // a futuro
+                    pedidoService.crearPedido(scanner, productoService);
                     break;
                 case "6":
-                    listarPedidos(); // a futuro
+                    pedidoService.mostrarPedidos();
                     break;
                 case "7":
                     salir = true;
@@ -56,50 +58,6 @@ public class Main {
 
             System.out.println();
 
-        }
-    }
-
-    private static void crearPedido() {
-
-        Pedido pedido = new Pedido();
-        boolean agregarMas = true;
-
-        while (agregarMas) {
-            try {
-                productoService.listarProductos();
-                System.out.print("Ingrese el nombre del producto a agregar al pedido (o 'salir' para terminar): ");
-                String nombreProducto = scanner.nextLine();
-                if (nombreProducto.equalsIgnoreCase("salir")) {
-                    agregarMas = false;
-                    break;
-                }
-
-                Producto producto = productoService.buscarPorNombre(nombreProducto);
-                if (producto == null) {
-                    System.out.println("Producto no encontrado. Intente nuevamente.");
-                    continue;
-                }
-
-                System.out.print("Ingrese la cantidad deseada: ");
-                int cantidad = Integer.parseInt(scanner.nextLine());
-
-                pedido.agregarItem(producto, cantidad);
-                System.out.println("Producto agregado al pedido.");
-
-            } catch (StockInsuficienteException e) {
-                System.out.println("Error: " + e.getMessage());
-            } catch (NumberFormatException e) {
-                System.out.println("Cantidad inválida. Debe ser un número entero.");
-            } catch (IllegalArgumentException e) {
-                System.out.println("Error: " + e.getMessage());
-            }
-        }
-
-        if (pedido.getItems().isEmpty()) {
-            System.out.println("No se agregaron productos al pedido.");
-        } else {
-            System.out.println("Resumen del pedido:");
-            pedido.mostrarDetalle();
         }
     }
 
@@ -185,21 +143,21 @@ public class Main {
             int stock = Integer.parseInt(scanner.nextLine());
 
             switch (tipo) {
-                case "1": // Libro
+                case "1":
                     System.out.print("Autor: ");
                     String autor = scanner.nextLine();
                     System.out.print("Género: ");
                     String genero = scanner.nextLine();
                     productoService.agregarProducto(new Libro(nombre, precio, stock, autor, genero));
                     break;
-                case "2": // Tecnología
+                case "2":
                     System.out.print("Marca: ");
                     String marca = scanner.nextLine();
                     System.out.print("Modelo: ");
                     String modelo = scanner.nextLine();
                     productoService.agregarProducto(new Tecnologia(nombre, precio, stock, marca, modelo));
                     break;
-                case "3": // Ropa
+                case "3":
                     System.out.print("Color: ");
                     String color = scanner.nextLine();
                     System.out.print("Talla: ");

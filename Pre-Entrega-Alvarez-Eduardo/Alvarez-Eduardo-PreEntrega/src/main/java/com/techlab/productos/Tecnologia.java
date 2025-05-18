@@ -7,8 +7,8 @@ public class Tecnologia extends Producto{
 
     public Tecnologia(String nombre, double precio, int cantidadEnStock, String marca, String modelo) {
         super(nombre, precio, cantidadEnStock);
-        this.marca = marca;
-        this.modelo = modelo;
+        setMarca(marca);
+        setModelo(modelo);
     }
 
     public String getMarca() {

@@ -2,6 +2,8 @@ package com.techlab.app;
 
 import com.techlab.excepciones.CreacionProductoException;
 import com.techlab.excepciones.ProductoNoEncontradoException;
+import com.techlab.excepciones.StockInsuficienteException;
+import com.techlab.pedidos.Pedido;
 import com.techlab.productos.Libro;
 import com.techlab.productos.Producto;
 import com.techlab.productos.Ropa;
@@ -57,6 +59,50 @@ public class Main {
         }
     }
 
+    private static void crearPedido() {
+
+        Pedido pedido = new Pedido();
+        boolean agregarMas = true;
+
+        while (agregarMas) {
+            try {
+                productoService.listarProductos();
+                System.out.print("Ingrese el nombre del producto a agregar al pedido (o 'salir' para terminar): ");
+                String nombreProducto = scanner.nextLine();
+                if (nombreProducto.equalsIgnoreCase("salir")) {
+                    agregarMas = false;
+                    break;
+                }
+
+                Producto producto = productoService.buscarPorNombre(nombreProducto);
+                if (producto == null) {
+                    System.out.println("Producto no encontrado. Intente nuevamente.");
+                    continue;
+                }
+
+                System.out.print("Ingrese la cantidad deseada: ");
+                int cantidad = Integer.parseInt(scanner.nextLine());
+
+                pedido.agregarItem(producto, cantidad);
+                System.out.println("Producto agregado al pedido.");
+
+            } catch (StockInsuficienteException e) {
+                System.out.println("Error: " + e.getMessage());
+            } catch (NumberFormatException e) {
+                System.out.println("Cantidad inválida. Debe ser un número entero.");
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+
+        if (pedido.getItems().isEmpty()) {
+            System.out.println("No se agregaron productos al pedido.");
+        } else {
+            System.out.println("Resumen del pedido:");
+            pedido.mostrarDetalle();
+        }
+    }
+
     private static void eliminarProducto() {
 
         System.out.print("Ingrese el nombre del producto a eliminar: ");
@@ -67,7 +113,7 @@ public class Main {
             System.out.println("Error: " + e.getMessage());
         }
     }
-    
+
     private static void buscarYActualizarProducto() {
 
         try {

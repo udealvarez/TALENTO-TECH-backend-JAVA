@@ -7,8 +7,8 @@ public class Libro extends Producto{
 
     public Libro(String nombre, double precio, int cantidadEnStock, String autor, String genero) {
         super(nombre, precio, cantidadEnStock);
-        this.autor = autor;
-        this.genero = genero;
+        setAutor(autor);
+        setGenero(genero);
     }
 
     public String getAutor() {

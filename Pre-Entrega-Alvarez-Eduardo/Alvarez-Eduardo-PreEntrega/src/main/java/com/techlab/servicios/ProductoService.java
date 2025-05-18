@@ -35,6 +35,15 @@ public class ProductoService {
         return null;
     }
 
+    public Producto buscarProductoPorId(int id) {
+        for (Producto p : productos) {
+            if (p.getId() == id) {
+                return p;
+            }
+        }
+        return null;
+    }
+
     public void eliminarProducto(String nombre) throws ProductoNoEncontradoException {
 
         Producto producto = buscarPorNombre(nombre);
@@ -52,7 +61,7 @@ public class ProductoService {
         agregarProducto(new Ropa("Campera de cuero", 12000.0, 3, "L", "Negro"));
     }
 
-    public List<Producto> getProductos() {
+    public List<Producto> obtenerProductos() {
         return productos;
     }
 }

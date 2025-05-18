@@ -7,8 +7,8 @@ public class Ropa extends Producto{
 
     public Ropa(String nombre, double precio, int cantidadEnStock, String color, String talla) {
         super(nombre, precio, cantidadEnStock);
-        this.color = color;
-        this.talla = talla;
+        setColor(color);
+        setTalla(talla);
     }
 
     public String getColor() {

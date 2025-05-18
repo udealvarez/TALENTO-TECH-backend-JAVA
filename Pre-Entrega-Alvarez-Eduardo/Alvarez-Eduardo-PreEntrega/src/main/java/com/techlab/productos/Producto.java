@@ -9,7 +9,7 @@ public abstract class Producto {
     private int cantidadEnStock;
 
     public Producto(String nombre, double precio, int cantidadEnStock) {
-        this.id = contador;
+        this.id = contador++;
         this.nombre = nombre;
         this.precio = precio;
         this.cantidadEnStock = cantidadEnStock;
@@ -65,10 +65,10 @@ public abstract class Producto {
     }
 
     public void setCantidadEnStock(int cantidadEnStock) {
-        if (precio > 0) {
-            this.precio = precio;
+        if (cantidadEnStock >= 0) {
+            this.cantidadEnStock = cantidadEnStock;
         } else {
-            throw new IllegalArgumentException("El precio debe ser mayor a 0.");
+            throw new IllegalArgumentException("El stock no puede ser negativo.");
         }
     }
 

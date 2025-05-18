@@ -1,5 +1,6 @@
 package com.techlab.servicios;
 
+import com.techlab.excepciones.ProductoNoEncontradoException;
 import com.techlab.productos.Producto;
 import com.techlab.productos.Libro;
 import com.techlab.productos.Ropa;
@@ -34,13 +35,15 @@ public class ProductoService {
         return null;
     }
 
-    public boolean eliminarProducto(String nombre) {
+    public void eliminarProducto(String nombre) throws ProductoNoEncontradoException {
+
         Producto producto = buscarPorNombre(nombre);
         if (producto != null) {
             productos.remove(producto);
-            return true;
+            System.out.println("Producto eliminado correctamente.");
+        } else {
+            throw new ProductoNoEncontradoException("No se encontró el producto con nombre: " + nombre);
         }
-        return false;
     }
 
     public void cargarProductosIniciales() {

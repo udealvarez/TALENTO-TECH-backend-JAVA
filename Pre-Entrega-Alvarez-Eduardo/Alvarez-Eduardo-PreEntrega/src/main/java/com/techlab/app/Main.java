@@ -33,10 +33,10 @@ public class Main {
                     productoService.listarProductos();
                     break;
                 case "3":
-                    buscarYActualizarProducto(); // lo armamos luego si querés
+                    buscarYActualizarProducto();
                     break;
                 case "4":
-                    eliminarProducto(); // también se puede hacer como método auxiliar
+                    eliminarProducto();
                     break;
                 case "5":
                     crearPedido(); // a futuro
@@ -57,13 +57,24 @@ public class Main {
         }
     }
 
+    private static void eliminarProducto() {
+
+        System.out.print("Ingrese el nombre del producto a eliminar: ");
+        String nombreEliminar = scanner.nextLine();
+        try {
+            productoService.eliminarProducto(nombreEliminar);
+        } catch (ProductoNoEncontradoException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+    
     private static void buscarYActualizarProducto() {
 
         try {
             System.out.print("Ingrese el nombre del producto a buscar: ");
             String nombre = scanner.nextLine();
 
-            Producto producto = productoService.buscarProductoPorNombre(nombre);
+            Producto producto = productoService.buscarPorNombre(nombre);
             if (producto == null) {
                 throw new ProductoNoEncontradoException("No se encontró un producto con ese nombre.");
             }
@@ -92,7 +103,7 @@ public class Main {
                 case "3":
                     System.out.print("Nuevo stock: ");
                     int nuevoStock = Integer.parseInt(scanner.nextLine());
-                    producto.setStock(nuevoStock);
+                    producto.setCantidadEnStock(nuevoStock);
                     break;
                 default:
                     System.out.println("Opción inválida.");

@@ -1,6 +1,7 @@
 package com.techlab.app;
 
 import com.techlab.excepciones.CreacionProductoException;
+import com.techlab.excepciones.EntradaInvalidaException;
 import com.techlab.excepciones.ProductoNoEncontradoException;
 import com.techlab.excepciones.StockInsuficienteException;
 import com.techlab.pedidos.Pedido;
@@ -10,6 +11,7 @@ import com.techlab.productos.Ropa;
 import com.techlab.productos.Tecnologia;
 import com.techlab.servicios.PedidoService;
 import com.techlab.servicios.ProductoService;
+import com.techlab.util.ValidadorEntrada;
 
 import java.util.Scanner;
 
@@ -57,7 +59,6 @@ public class Main {
             }
 
             System.out.println();
-
         }
     }
 
@@ -136,32 +137,34 @@ public class Main {
             String tipo = scanner.nextLine();
 
             System.out.print("Nombre: ");
-            String nombre = scanner.nextLine();
+            String nombre = ValidadorEntrada.validarTexto(scanner.nextLine(), "nombre");
+
             System.out.print("Precio: ");
-            double precio = Double.parseDouble(scanner.nextLine());
+            double precio = ValidadorEntrada.validarDouble(scanner.nextLine(), "precio");
+
             System.out.print("Cantidad en stock: ");
-            int stock = Integer.parseInt(scanner.nextLine());
+            int stock = ValidadorEntrada.validarEntero(scanner.nextLine(), "stock");
 
             switch (tipo) {
                 case "1":
                     System.out.print("Autor: ");
-                    String autor = scanner.nextLine();
+                    String autor = ValidadorEntrada.validarTexto(scanner.nextLine(), "autor");
                     System.out.print("Género: ");
-                    String genero = scanner.nextLine();
+                    String genero = ValidadorEntrada.validarTexto(scanner.nextLine(), "genero");
                     productoService.agregarProducto(new Libro(nombre, precio, stock, autor, genero));
                     break;
                 case "2":
                     System.out.print("Marca: ");
-                    String marca = scanner.nextLine();
+                    String marca = ValidadorEntrada.validarTexto(scanner.nextLine(), "marca");
                     System.out.print("Modelo: ");
-                    String modelo = scanner.nextLine();
+                    String modelo = ValidadorEntrada.validarTexto(scanner.nextLine(), "modelo");
                     productoService.agregarProducto(new Tecnologia(nombre, precio, stock, marca, modelo));
                     break;
                 case "3":
                     System.out.print("Color: ");
-                    String color = scanner.nextLine();
+                    String color = ValidadorEntrada.validarTexto(scanner.nextLine(), "color");
                     System.out.print("Talla: ");
-                    String talla = scanner.nextLine();
+                    String talla = ValidadorEntrada.validarTexto(scanner.nextLine(), "talla");
                     productoService.agregarProducto(new Ropa(nombre, precio, stock, color, talla));
                     break;
                 default:

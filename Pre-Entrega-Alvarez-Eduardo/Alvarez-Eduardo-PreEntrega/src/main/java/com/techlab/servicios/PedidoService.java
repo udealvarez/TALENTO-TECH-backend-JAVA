@@ -1,6 +1,7 @@
 package com.techlab.servicios;
 
 import com.techlab.pedidos.Pedido;
+import com.techlab.util.ValidadorEntrada;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +25,10 @@ public class PedidoService {
         boolean continuar = true;
 
         while (continuar) {
-            // Mostrar productos disponibles
             productoService.listarProductos();
 
             System.out.print("Ingrese el ID del producto que desea agregar al pedido (o -1 para finalizar): ");
-            int idProducto = scanner.nextInt();
+            int idProducto = ValidadorEntrada.validarEntero(scanner.nextLine(), "idProducto");
             scanner.nextLine();
 
             if (idProducto == -1) {
@@ -43,7 +43,7 @@ public class PedidoService {
             }
 
             System.out.print("Ingrese la cantidad deseada: ");
-            int cantidad = scanner.nextInt();
+            int cantidad = ValidadorEntrada.validarEntero(scanner.nextLine(), "cantidad");
             scanner.nextLine();
 
             try {
@@ -54,7 +54,7 @@ public class PedidoService {
             }
 
             System.out.print("¿Desea agregar otro producto al pedido? (s/n): ");
-            String respuesta = scanner.nextLine();
+            String respuesta = ValidadorEntrada.validarTexto(scanner.nextLine(), "respuesta");
             if (!respuesta.equalsIgnoreCase("s")) {
                 continuar = false;
             }
